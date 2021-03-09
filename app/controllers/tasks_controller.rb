@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class TasksController < ApplicationController
     def index
   　end
 
@@ -17,40 +17,37 @@ class MessagesController < ApplicationController
      else
       flash.now[:danger] = 'Message が投稿されませんでした'
       render :new
+     end
     end
-    
+
+    def edit
+      @message = Message.find(params[:id])
     end
 
-  def edit
-      @message = Message.find(params[:id])
-  end
-
-  def update
+    def update
       @message = Message.find(params[:id])
 
-    if @message.update(message_params)
+     if @message.update(message_params)
       flash[:success] = 'Message は正常に更新されました'
       redirect_to @message
-    else
+     else
       flash.now[:danger] = 'Message は更新されませんでした'
       render :edit
+     end
     end
-  end
 
-  def destroy
+    def destroy
        @message = Message.find(params[:id])
        @message.destroy
 
        flash[:success] = 'Message は正常に削除されました'
        redirect_to messages_url
-  end
+    end
 
-  private
+    private
 
   # Strong Parameter
-  def message_params
-    params.require(:message).permit(:content)
-  end
-  
+    def message_params
+      params.require(:message).permit(:content)
+    end
 end
-
