@@ -1,10 +1,3 @@
-<%= form_with(model: task, local: true) do |f| %>
-  
-  <%= f.label :status, 'タイトル' %>
-  <%= f.text_field :title %>
-
-  <%= f.label :content, 'タスク' %>
-  <%= f.text_field :content %>
-
-  <%= f.submit '投稿' %>
+<% flash.each do |task_type, task| %>
+  <div><%= message %></div>
 <% end %>
