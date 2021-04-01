@@ -1,12 +1,10 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:show, :edit, :destroy] 
+  before_action :correct_user, only: [:update, :show, :edit, :destroy] 
   
    
   def index
-    
-      @task = current_user.tasks.build  # form_with 用
-      @tasks = current_user.tasks.order(id: :desc)
+    @tasks = current_user.tasks.order(id: :desc)
     
   end
   
@@ -35,7 +33,7 @@ class TasksController < ApplicationController
 
  
   def update
-    @task = Task.find(params[:id])
+    
     if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
       redirect_to @task
